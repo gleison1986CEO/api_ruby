@@ -8,7 +8,7 @@ http = Net::HTTP.new(url.host, url.port)
 request = Net::HTTP::Post.new(url)
 request["Authorization"] = "Bearer foobar"
 request["Content-Type"] = 'application/json'
-request.body = "{\n\t\"email\": \"gleison@gmail.com\",\n\t\"password\": \"0908Gle@\"\n}"
+request.body = "{\n\t\"email\": \"gleison@gmail.com\",\n\t\"password\": \"XXXXXXXXXX\"\n}"
 
 
 response = http.request(request)
