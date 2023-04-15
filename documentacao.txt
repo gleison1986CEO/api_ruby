@@ -1,0 +1,174 @@
+-----> doc.
+
+rails g resource Post titulo:string texto:string  user:references
+rails g resource Comentario nome:string comentarioT:string post:references
+rails db:migrate
+rails db:seed
+
+--> UTILIZADO A BIBLIOTECA DEVISE PARA AUTHENTICAÇÃO DE USUÁRIOS
+gem "devise", "~> 4.8"
+gem "devise_token_auth", "~> 1.2"
+
+
+--> GEM RSWAG PARA BIBLIOTECA SWAGGER 
+rails g rswag:install
+gem "rswag", "~> 2.6"
+rake rswag:specs:swaggerize
+
+--> VERSÃO RUBY E RAILS
+Rails 6.1.7
+ruby 3.0.2p107 (2021-07-07 revision 0db68f0233) [x86_64-linux-gnu]
+
+
+--> Test_Unit
+ --comentarios
+ --delete_comentarios
+ --delete_post
+ --login
+ --novo_comentario
+ --novo_post
+ --posts
+ --update_comentario
+ --update_post
+
+################
+
+POST /api/v1/auth/sign_in HTTP/1.1
+Content-Type: application/json
+Host: 127.0.0.1:3000
+Content-Length: 58
+
+{
+	"email": "gleison@gmail.com",
+	"password": "0908Gle@"
+} 
+
+
+#################
+
+POST /api/v1/posts HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhY2Nlc3MtdG9rZW4iOiJ3aHBoSnpQNUVpOWRvQ2lDRFdQSW5nIiwidG9rZW4tdHlwZSI6IkJlYXJlciIsImNsaWVudCI6IjYyZWs5NkdqMWk0eHF5WlJTTkZCZFEiLCJleHBpcnkiOiIxNjgyNzQwODYxIiwidWlkIjoiZ2xlaXNvbkBnbWFpbC5jb20ifQ==
+Host: 127.0.0.1:3000
+Content-Length: 192
+
+ {
+		"id": 1,
+		"titulo": "facebook commentefefwfwe",
+		"texto": "fewfewefwfdeffwfew",
+		"user_id": 1,
+		"created_at": "2023-04-04T00:00:00.000Z",
+		"updated_at": "2023-04-04T00:00:00.000Z"
+	}
+
+
+################
+
+POST /api/v1/comentarios HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhY2Nlc3MtdG9rZW4iOiJMV1Q3Vm51WWpYdXAzeE1yZ0M4UGFnIiwidG9rZW4tdHlwZSI6IkJlYXJlciIsImNsaWVudCI6InM5S1htbHdxS09CUlo3OXJvNWxrWkEiLCJleHBpcnkiOiIxNjgyNzQ5OTkyIiwidWlkIjoiZ2xlaXNvbkBnbWFpbC5jb20ifQ==
+Host: 127.0.0.1:3000
+Content-Length: 166
+
+ {
+		"id": 2,
+		"nome": "ola teste",
+		"comentarioT": "ola",
+		"post_id": 8,
+		"created_at": "2023-04-04T00:00:00.000Z",
+		"updated_at": "2023-04-04T00:00:00.000Z"
+	}
+
+
+################
+
+
+GET /api/v1/posts HTTP/1.1
+Authorization: Bearer eyJhY2Nlc3MtdG9rZW4iOiJXZ3ZTbzR6T0dfVjQ2ejUwRjctQUZ3IiwidG9rZW4tdHlwZSI6IkJlYXJlciIsImNsaWVudCI6IlNoY2R0LW5Kd3RVWWFWUGtxR1lxanciLCJleHBpcnkiOiIxNjgyNzQ1ODI3IiwidWlkIjoiZ2xlaXNvbkBnbWFpbC5jb20ifQ==
+Host: 127.0.0.1:3000
+
+
+###############
+
+POST /api/v1/comentarios HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhY2Nlc3MtdG9rZW4iOiJMV1Q3Vm51WWpYdXAzeE1yZ0M4UGFnIiwidG9rZW4tdHlwZSI6IkJlYXJlciIsImNsaWVudCI6InM5S1htbHdxS09CUlo3OXJvNWxrWkEiLCJleHBpcnkiOiIxNjgyNzQ5OTkyIiwidWlkIjoiZ2xlaXNvbkBnbWFpbC5jb20ifQ==
+Host: 127.0.0.1:3000
+Content-Length: 166
+
+ {
+		"id": 2,
+		"nome": "ola teste",
+		"comentarioT": "ola",
+		"post_id": 8,
+		"created_at": "2023-04-04T00:00:00.000Z",
+		"updated_at": "2023-04-04T00:00:00.000Z"
+	}
+
+##############
+
+GET /api/v1/posts HTTP/1.1
+Authorization: Bearer eyJhY2Nlc3MtdG9rZW4iOiJXZ3ZTbzR6T0dfVjQ2ejUwRjctQUZ3IiwidG9rZW4tdHlwZSI6IkJlYXJlciIsImNsaWVudCI6IlNoY2R0LW5Kd3RVWWFWUGtxR1lxanciLCJleHBpcnkiOiIxNjgyNzQ1ODI3IiwidWlkIjoiZ2xlaXNvbkBnbWFpbC5jb20ifQ==
+Host: 127.0.0.1:3000
+
+##############
+
+
+GET /api/v1/comentarios/2 HTTP/1.1
+Authorization: Bearer eyJhY2Nlc3MtdG9rZW4iOiJDelFrNlFydVdULWRlY21zcDBSdHNRIiwidG9rZW4tdHlwZSI6IkJlYXJlciIsImNsaWVudCI6IjRmd1p0dkRFR2pfVGNqaFFpVkFCNVEiLCJleHBpcnkiOiIxNjgyNzQzMDk3IiwidWlkIjoiZ2xlaXNvbkBnbWFpbC5jb20ifQ==
+Host: 127.0.0.1:3000
+
+
+###############
+
+
+PUT /api/v1/posts/2 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhY2Nlc3MtdG9rZW4iOiJ6YlNHUzUySTRHVm5NQTY1OENsZjRRIiwidG9rZW4tdHlwZSI6IkJlYXJlciIsImNsaWVudCI6IkFMMjlEcW5mTWo1VW5QUHpUSy1HQmciLCJleHBpcnkiOiIxNjgyNzQyODE0IiwidWlkIjoiZ2xlaXNvbkBnbWFpbC5jb20ifQ==
+Host: 127.0.0.1:3000
+Content-Length: 190
+
+{
+
+		"titulo": "facebook commentefeEEEfwfwe",
+		"texto": "fewfewefwfdeffwfewefwefe",
+		"user_id": 1,
+		"created_at": "2023-04-04T00:00:00.000Z",
+		"updated_at": "2023-04-04T00:00:00.000Z"
+	}
+
+##############    
+
+PUT /api/v1/comentarios/2 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhY2Nlc3MtdG9rZW4iOiJwaFBUQmpYUllGMkxJUkdGeXZhbXlnIiwidG9rZW4tdHlwZSI6IkJlYXJlciIsImNsaWVudCI6IlpNaDhSNEUxUnUySEI2RERCNDJ6VEEiLCJleHBpcnkiOiIxNjgyNzQzMjYxIiwidWlkIjoiZ2xlaXNvbkBnbWFpbC5jb20ifQ==
+Host: 127.0.0.1:3000
+Content-Length: 149
+
+{
+
+	"nome": "ola teste",
+	"comentarioT": "ola",
+	"post_id": 5,
+	"created_at": "2023-04-04T00:00:00.000Z",
+	"updated_at": "2023-04-04T00:00:00.000Z"
+}
+
+##############
+
+DELETE /api/v1/posts/1 HTTP/1.1
+Authorization: Bearer eyJhY2Nlc3MtdG9rZW4iOiJudDFaWmlMRmFBUmZxRXlPTEFCc1lBIiwidG9rZW4tdHlwZSI6IkJlYXJlciIsImNsaWVudCI6IjllTHJPc2d4d0RteEp6dHVKeG1lQVEiLCJleHBpcnkiOiIxNjgyNzQyMzIwIiwidWlkIjoiZ2xlaXNvbkBnbWFpbC5jb20ifQ==
+Host: 127.0.0.1:3000
+
+##############
+
+DELETE /api/v1/comentarios/3 HTTP/1.1
+Authorization: Bearer eyJhY2Nlc3MtdG9rZW4iOiJTYWMzOWdqbkZNbWhTTjJvdWw1U2V3IiwidG9rZW4tdHlwZSI6IkJlYXJlciIsImNsaWVudCI6IkMwbDZuVEpRSnNHRlEzckdQcHozbUEiLCJleHBpcnkiOiIxNjgyNzQzNDcyIiwidWlkIjoiZ2xlaXNvbkBnbWFpbC5jb20ifQ==
+Host: 127.0.0.1:3000
+
+
+
+
+
+
+
