@@ -44,7 +44,7 @@ Content-Length: 58
 
 {
 	"email": "gleison@gmail.com",
-	"password": "0908Gle@"
+	"password": "XXXXXXX"
 } 
 
 
