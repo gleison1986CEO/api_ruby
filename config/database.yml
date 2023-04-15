@@ -6,7 +6,7 @@ development:
   database: api_empresa
   pool: 5
   username: gleison
-  password: 0908Gle@
+  password: XXXXXXXX
   host: localhost
 
 test:
@@ -16,7 +16,7 @@ test:
   database: api_empresa
   pool: 5
   username: gleison
-  password: 0908Gle@
+  password: XXXXXXXXX
   host: localhost
 
 production:
