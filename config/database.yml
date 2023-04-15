@@ -25,4 +25,4 @@ production:
   database: api_empresa
   pool: 5
   username: gleison
-  password: 0908Gle@
+  password: XXXXXXXX
